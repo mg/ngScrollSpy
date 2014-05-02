@@ -45,30 +45,30 @@ The data is normalized, e.g. any overscroll data is removed and instead flags ar
     handler: function(ScrollData, ScrollDelta)
 A generic function to add a scroll handler. The *cond* function return true or false based on the data in the two parameters it receives. If the *cond* function returns true the handler get's called with the two objects. The addHandler function returns an id to the handler. Use the id to clean up once the handler is no longer needed.
 
-####ScrollSpy.removeHandler(id):
+#####ScrollSpy.removeHandler(id):
 Remove handler. Use this to clean up once you don't need to receive the event any more.
 
-####ScrollSpy.trigger(): 
+#####ScrollSpy.trigger(): 
 Use this function to programatically trigger a scroll event. Sets the property *isForced* to true while the event handlers are executed.
 
-####ScrollSpy.onScroll(handler) { return handler-id }:
+#####ScrollSpy.onScroll(handler) { return handler-id }:
     handler: function(ScrollData, ScrollDelta)
 Register a handler that receives all scroll events.
 
-####ScrollSpy.onYScroll(handler) { return handler-id }:
-####ScrollSpy.onXScroll(handler) { return handler-id }:
+#####ScrollSpy.onYScroll(handler) { return handler-id }:
+#####ScrollSpy.onXScroll(handler) { return handler-id }:
     handler: function(pos, delta, ScrollData, ScrollDelta)
 Register a handler to receive a scroll event along the Y axis or the X axis.
 
-####ScrollSpy.onOverscrollVert(handler) { return handler-id }:
-####ScrollSpy.onOverscrollTop(hatndler) { return handler-id }:
-####ScrollSpy.onOverscrollBottom(handler) { return handler-id }:
+#####ScrollSpy.onOverscrollVert(handler) { return handler-id }:
+#####ScrollSpy.onOverscrollTop(hatndler) { return handler-id }:
+#####ScrollSpy.onOverscrollBottom(handler) { return handler-id }:
     handler: function(ScrollData, ScrollDelta)
 Recieve overscroll events along the Y axis.
 
-####ScrollSpy.onOverscrollHorz(handler) { return handler-id }:
-####ScrollSpy.onOverscrollLeft(handler) { return handler-id }:
-####ScrollSpy.onOverscrollRight(handler) { return handler-id }:
+#####ScrollSpy.onOverscrollHorz(handler) { return handler-id }:
+#####ScrollSpy.onOverscrollLeft(handler) { return handler-id }:
+#####ScrollSpy.onOverscrollRight(handler) { return handler-id }:
     handler: function(ScrollData, ScrollDelta)
 Recieve overscroll events along the X axis.
 
