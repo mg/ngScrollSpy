@@ -1,1 +1,1 @@
-##scaffold-mod-angular
+##ngScrollSpy
