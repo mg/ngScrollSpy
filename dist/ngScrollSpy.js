@@ -60,13 +60,6 @@ mod.service('ScrollSpy', function($window) {
 			maxHeight: state2.maxHeight - state1.maxHeight,
 		};
 
-		// copy overscroll
-		delta.overscrollTop= state2.overscrollTop;
-		delta.overscrollBottom= state2.overscrollBottom;
-		delta.overscrollLeft= state2.overscrollLeft;
-		delta.overscrollRight= state2.overscrollRight;
-		delta.hasOverscroll= state2.hasOverscroll;
-
 		// add velocity information
 		if(state2.width > 0)
 			delta.velocityX= delta.posX / state2.width;
@@ -91,7 +84,7 @@ mod.service('ScrollSpy', function($window) {
 	var scrollHandler= function(force) {
 		var curPos= rawData($window);
 		var delta= getDelta(lastPos, curPos);
-		if(!delta.isEqual || delta.hasOverscroll || force) {
+		if(!delta.isEqual || curPos.hasOverscroll || force) {
 			for(var k in handlers) {
 				var cond= handlers[k].cond;
 				if(cond(curPos, delta) || force) {
@@ -153,42 +146,42 @@ mod.service('ScrollSpy', function($window) {
 	// add handlers for various overscroll events
 	this.onOverscrollHorz= function(handler) {
 		return self.addHandler(
-			function(cur, delta) { return delta.overscrollLeft || delta.overscrollRight; },
+			function(cur, delta) { return cur.overscrollLeft || cur.overscrollRight; },
 			handler
 		);
 	};
 
 	this.onOverscrollLeft= function(handler) {
 		return self.addHandler(
-			function(cur, delta) { return delta.overscrollLeft; },
+			function(cur, delta) { return cur.overscrollLeft; },
 			handler
 		);
 	};
 
 	this.onOverscrollRight= function(handler) {
 		return self.addHandler(
-			function(cur, delta) { return delta.overscrollRight; },
+			function(cur, delta) { return cur.overscrollRight; },
 			handler
 		);
 	};
 
 	this.onOverscrollVert= function(handler) {
 		return self.addHandler(
-			function(cur, delta) { return delta.overscrollTop || delta.overscrollBottom; },
+			function(cur, delta) { return cur.overscrollTop || cur.overscrollBottom; },
 			handler
 		);
 	};
 
 	this.onOverscrollTop= function(handler) {
 		return self.addHandler(
-			function(cur, delta) { return delta.overscrollTop; },
+			function(cur, delta) { return cur.overscrollTop; },
 			handler
 		);
 	};
 
 	this.onOverscrollBottom= function(handler) {
 		return self.addHandler(
-			function(cur, delta) { return delta.overscrollBottom; },
+			function(cur, delta) { return cur.overscrollBottom; },
 			handler
 		);
 	};
