@@ -1,7 +1,7 @@
 {
   "name": "ngScrollSpy",
   "version": "1.0.0",
-  "description": "n implementation of Bootstrap's scollspy and affix for AngularJS",
+  "description": "An implementation of Bootstrap's scollspy and affix for AngularJS",
   "scripts": {
     "test": "gulp test"
   },
