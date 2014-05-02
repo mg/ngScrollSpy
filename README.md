@@ -40,16 +40,16 @@ The *ScrollSpy* service provides an api to work with the scroll event. It builds
     }
 The data is normalized, e.g. any overscroll data is removed and instead flags are added to the data. The velocity is calculated as poistion delta divided by window size, e.g. (curY - prevY) / height.
 
-####ScrollSpy.addHandler(cond,handler) { return handler-id }:
+#####ScrollSpy.addHandler(cond,handler) { return handler-id }:
     cond: function(ScrollData, ScrollDelta) { return true/false }
     handler: function(ScrollData, ScrollDelta)
 A generic function to add a scroll handler. The *cond* function return true or false based on the data in the two parameters it receives. If the *cond* function returns true the handler get's called with the two objects. The addHandler function returns an id to the handler. Use the id to clean up once the handler is no longer needed.
 
-####ScrollSpy.removeHanlder(id):
+####ScrollSpy.removeHandler(id):
 Remove handler. Use this to clean up once you don't need to receive the event any more.
 
 ####ScrollSpy.trigger(): 
-Use this function to programatically trigger a scroll event.
+Use this function to programatically trigger a scroll event. Sets the property *isForced* to true while the event handlers are executed.
 
 ####ScrollSpy.onScroll(handler) { return handler-id }:
     handler: function(ScrollData, ScrollDelta)
