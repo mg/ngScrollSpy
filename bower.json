@@ -1,0 +1,11 @@
+{
+  "name": "ng",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "angular": "latest"
+  },
+  "devDependencies": {
+    "angular-mocks": "latest"
+  }
+}
