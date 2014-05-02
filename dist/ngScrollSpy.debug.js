@@ -364,7 +364,7 @@ mod.directive('pageitems', function(ScrollSpy) {
 
 		var spyElems = scope.spyElems;
 		var topmargin = scope.topmargin | 0;
-		ScrollSpy.onYScroll(function(y, delta, data) {
+		var scrollHandler= ScrollSpy.onYScroll(function(y, delta, data) {
 			var highlightSpy = null;
 			var spies = scope.spies;
 
@@ -400,6 +400,10 @@ mod.directive('pageitems', function(ScrollSpy) {
 			}
 
 			highlightSpy.set();
+			scope.$on('destroy', function() {
+				ScrollSpy.removeHandler(scrollHandler);
+      });
+
 		});
 	};
 
