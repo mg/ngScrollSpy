@@ -1,18 +1,18 @@
 {
   "name": "ngScrollSpy",
-  "version": "0.0.0",
-  "description": "",
+  "version": "1.0.0",
+  "description": "n implementation of Bootstrap's scollspy and affix for AngularJS",
   "scripts": {
     "test": "gulp test"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mg/ng.git"
+    "url": "https://github.com/mg/ngScrollSpy.git"
   },
   "bugs": {
-    "url": "https://github.com/mg/ng/issues"
+    "url": "https://github.com/mg/ngScrollSpy/issues"
   },
-  "homepage": "https://github.com/mg/ng",
+  "homepage": "https://github.com/mg/ngScrollSpy",
   "author": "Magnús Örn Gylfason",
   "license": "MIT",
   "devDependencies": {
