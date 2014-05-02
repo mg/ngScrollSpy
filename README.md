@@ -131,9 +131,9 @@ Only AngularJS.
 ###Example?
 The *demo* directory contains three demo files:
 
-+*horz.html*: A demonstration of affixing a DOM element to either the left or the right edge of the window.
-+*vert.html*: A demonstration of affixing a DOM element to either the top or the bottom edge of the window.
-+*pagemenu.html*: A demonstration of a page menu.
++ *horz.html*: A demonstration of affixing a DOM element to either the left or the right edge of the window.
++ *vert.html*: A demonstration of affixing a DOM element to either the top or the bottom edge of the window.
++ *pagemenu.html*: A demonstration of a page menu.
 
 ###Credits?
 Aside for the Bootstrap people for the obvious inspiration, this code was inspired by Evil Closet Monkey's answer to a question on [StackExchange](http://stackoverflow.com/questions/17470370/how-to-implement-a-scrollspy-in-angular-js-the-right-way).
