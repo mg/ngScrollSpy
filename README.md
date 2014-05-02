@@ -126,7 +126,7 @@ And add ngScrollSpy as a dependency for your app:
     angular.module('myApp', ['ngScrollSpy']);
 
 ###Dependencies?
-Only AngularJS. This does not in any way depend on jQuery, Bootstrap's js or css, or AngularUI.
+Only AngularJS.
 
 ###Example?
 The *demo* directory contains three demo files:
