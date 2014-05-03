@@ -40,36 +40,60 @@ The *ScrollSpy* service provides an api to work with the scroll event. It builds
     }
 The data is normalized, e.g. any overscroll data is removed and instead flags are added to the data. The velocity is calculated as poistion delta divided by window size, e.g. (curY - prevY) / height.
 
-#####ScrollSpy.addHandler(cond,handler) { return handler-id }:
+#####Registering a scroll handler
+
+    ScrollSpy.addHandler(cond,handler) { return handler-id }:
     cond: function(ScrollData, ScrollDelta) { return true/false }
     handler: function(ScrollData, ScrollDelta)
-A generic function to add a scroll handler. The *cond* function return true or false based on the data in the two parameters it receives. If the *cond* function returns true the handler get's called with the two objects. The addHandler function returns an id to the handler. Use the id to clean up once the handler is no longer needed.
 
-#####ScrollSpy.removeHandler(id):
+A generic function to add a scroll handler. The *cond* function return true or false based on the data in the two parameters it receives. If the *cond* function returns true the handler get's called with the two objects. The addHandler function returns an id to the handler. Use the id to clean up once the handler is no longer needed. **In most cases you should not use this hook unless you need very special condition logic**.
+
+#####Cleanup on destory event
+
+    ScrollSpy.removeHandler(id):
+
 Remove handler. Use this to clean up once you don't need to receive the event any more.
 
-#####ScrollSpy.trigger(): 
+#####Trigger the scroll event
+
+    ScrollSpy.trigger(): 
+
 Use this function to programatically trigger a scroll event. Sets the property *isForced* to true while the event handlers are executed.
 
-#####ScrollSpy.onScroll(handler) { return handler-id }:
+#####Recieve all scroll events
+
+    ScrollSpy.onScroll(handler) { return handler-id }:
+    
     handler: function(ScrollData, ScrollDelta)
+
 Register a handler that receives all scroll events.
 
-#####ScrollSpy.onYScroll(handler) { return handler-id }:
-#####ScrollSpy.onXScroll(handler) { return handler-id }:
+#####Handling scrolling along single axis
+
+    ScrollSpy.onYScroll(handler) { return handler-id }:
+    ScrollSpy.onXScroll(handler) { return handler-id }:
+    
     handler: function(pos, delta, ScrollData, ScrollDelta)
+
 Register a handler to receive a scroll event along the Y axis or the X axis.
 
-#####ScrollSpy.onOverscrollVert(handler) { return handler-id }:
-#####ScrollSpy.onOverscrollTop(hatndler) { return handler-id }:
-#####ScrollSpy.onOverscrollBottom(handler) { return handler-id }:
+#####Handling vertical overscroll
+
+    ScrollSpy.onOverscrollVert(handler) { return handler-id }:
+    ScrollSpy.onOverscrollTop(hatndler) { return handler-id }:
+    ScrollSpy.onOverscrollBottom(handler) { return handler-id }:
+    
     handler: function(ScrollData, ScrollDelta)
+
 Recieve overscroll events along the Y axis.
 
-#####ScrollSpy.onOverscrollHorz(handler) { return handler-id }:
-#####ScrollSpy.onOverscrollLeft(handler) { return handler-id }:
-#####ScrollSpy.onOverscrollRight(handler) { return handler-id }:
+#####Handling horizontal overscroll
+
+    ScrollSpy.onOverscrollHorz(handler) { return handler-id }:
+    ScrollSpy.onOverscrollLeft(handler) { return handler-id }:
+    ScrollSpy.onOverscrollRight(handler) { return handler-id }:
     handler: function(ScrollData, ScrollDelta)
+
 Recieve overscroll events along the X axis.
 
 ### The affix directive
@@ -119,7 +143,7 @@ Install with bower:
 
 Add a &lt;script&gt; to your index.html:
 
-    <script src="/bower_components/ngScrollSpy/dist/ngScrollSpy.js"></script>
+    <script src="/bower_components/ngScrollSpy/dist/ngScrollSpy.min.js"></script>
 
 And add ngScrollSpy as a dependency for your app:
 
@@ -136,7 +160,7 @@ The *demo* directory contains three demo files:
 + *pagemenu.html*: A demonstration of a page menu.
 
 ###Credits?
-Aside for the Bootstrap people for the obvious inspiration, this code was inspired by Evil Closet Monkey's answer to a question on [StackExchange](http://stackoverflow.com/questions/17470370/how-to-implement-a-scrollspy-in-angular-js-the-right-way).
+Aside for the Bootstrap people for the obvious inspiration, the pagemenu code was inspired by Evil Closet Monkey's answer to a question on [StackExchange](http://stackoverflow.com/questions/17470370/how-to-implement-a-scrollspy-in-angular-js-the-right-way).
 
 ###And you are?
 Magnús Örn Gylfason, a web programmer working in the banking industry in Iceland. You can contact me at
