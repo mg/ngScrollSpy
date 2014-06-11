@@ -426,7 +426,7 @@ mod.directive('pagemenu', function($compile, $location, $anchorScroll) {
 			// parse basic info from the dom item
 			var item = {
 				link: data.id,
-				text: data.innerText,
+				text: data.textContent || data.innerText,
 				parent: ''
 			};
 
