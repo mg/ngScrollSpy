@@ -5,6 +5,7 @@
   "dependencies": {
     "angular": "~1.2.0"
   },
+  "main":"./dist/ngScrollSpy.js",
   "devDependencies": {
     "angular-mocks": "~1.2.0"
   }
