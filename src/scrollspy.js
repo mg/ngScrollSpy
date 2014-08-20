@@ -6,8 +6,8 @@ mod.service('ScrollSpy', function($window) {
 			height: w.innerHeight,
 			maxWidth: w.document.body.scrollWidth,
 			maxHeight: w.document.body.scrollHeight,
-			posX: w.scrollX,
-			posY: w.scrollY
+			posX: w.scrollX || w.pageXOffset || w.document.documentElement.scrollLeft,
+			posY: w.scrollY || w.pageYOffset || w.document.documentElement.scrollTop
 		};
 
 		// remove but log overscroll
