@@ -379,7 +379,7 @@ mod.directive('pageitems', function(ScrollSpy) {
 				}
 
 				var pos = spyElem.getBoundingClientRect().top;
-				if (pos <= topmargin) {
+				if (Math.floor(pos) <= topmargin) {
 					// the window has been scrolled past the top of a spy element
 					spy.pos = pos;
 
