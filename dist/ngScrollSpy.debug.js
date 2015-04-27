@@ -9,14 +9,24 @@ Licence: MIT
 
 mod.service('ScrollSpy', function($window) {
 	var rawData= function(w) {
+        // Fix for IE browsers
+        // See https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY?redirectlocale=en-US&redirectslug=DOM%2Fwindow.scrollY for more info
+        var innerWidth = w.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        var innerHeight = w.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        var supportPageOffset = w.pageXOffset !== undefined;
+        var isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
+
+        var scrollX = supportPageOffset ? w.pageXOffset : isCSS1Compat ? document.documentElement.scrollLeft : document.body.scrollLeft;
+        var scrollY= supportPageOffset ? w.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
+
 		// retrieve interesting data
 		var raw= {
 			width: w.innerWidth,
 			height: w.innerHeight,
 			maxWidth: w.document.body.scrollWidth,
 			maxHeight: w.document.body.scrollHeight,
-			posX: w.scrollX,
-			posY: w.scrollY
+			posX: w.scrollX || w.pageXOffset || w.document.documentElement.scrollLeft,
+			posY: w.scrollY || w.pageYOffset || w.document.documentElement.scrollTop
 		};
 
 		// remove but log overscroll
