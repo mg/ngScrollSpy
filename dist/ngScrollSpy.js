@@ -216,7 +216,7 @@ mod.directive('affix', function(ScrollSpy) {
       affixedPos,
       trigger= false;
 
-    angular.extend({offset: 0}, affixOptions);
+    affixOptions = angular.extend({offset: 0}, affixOptions);
 
     if(affixTo === 'top') {
       scrollHandler= ScrollSpy.onYScroll(function(pos) {
