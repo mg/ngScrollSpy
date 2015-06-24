@@ -210,21 +210,23 @@ mod.directive('affix', function(ScrollSpy) {
   };
 
   var scrollHandler;
-  var linkFn= function(affixTo, affixClass, elem) {
+  var linkFn= function(affixTo, affixClass, affixOptions, elem) {
     var isAffixed= false,
       wasAffixed= false,
       affixedPos,
       trigger= false;
+
+    angular.extend({offset: 0}, affixOptions);
 
     if(affixTo === 'top') {
       scrollHandler= ScrollSpy.onYScroll(function(pos) {
         wasAffixed= isAffixed;
         affixFn(function(rect) {
           if(isAffixed) {
-            isAffixed= (affixedPos <= pos);
+            isAffixed= (affixedPos <= pos + affixOptions.offset);
             return isAffixed;
-          } else if(rect.top <= 0) {
-            if(rect.top < 0) affixedPos= pos + rect.top;
+          } else if(rect.top <= affixOptions.offset) {
+            if(rect.top < affixOptions.offset) affixedPos= pos + rect.top;
             else affixedPos= pos;
             return (isAffixed= true);
           }
@@ -302,13 +304,15 @@ mod.directive('affix', function(ScrollSpy) {
     restrict: 'A',
     scope: {
     	affix: '@',
-      affixClass: '@'
+      affixClass: '@',
+      affixOptions: '@'
     },
     link: function(scope, elem, attrs, controller) {
       // call linking function, supply default values if needed
       scope.affix= scope.affix || 'top';
       scope.affixClass= scope.affixClass || 'affix';
-      linkFn(scope.affix, scope.affixClass, elem);
+      scope.affixOptions = scope.affixOptions ? scope.$eval(scope.affixOptions) : {};
+      linkFn(scope.affix, scope.affixClass, scope.affixOptions, elem);
       scope.$on('destroy', function() {
         ScrollSpy.removeHandler(scrollHandler);
       });
