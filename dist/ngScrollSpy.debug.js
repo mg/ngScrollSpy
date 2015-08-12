@@ -198,13 +198,32 @@ mod.service('ScrollSpy', function($window) {
 
 });
 mod.directive('affix', function(ScrollSpy) {
-  var affixFn= function(shouldAffixFn, wasAffixed, affixClass, elem) {
+  var affixClone= function(elem, affixClass) {
+    if (!elem.data('$ngScrollSpy.clone')) {
+      var clone = elem.clone();
+      clone.addClass(affixClass);
+      clone.css('position', 'fixed');
+      elem.data('$ngScrollSpy.clone', clone);
+    }
+    return elem.data('$ngScrollSpy.clone');
+  };
+
+  var affixFn= function(shouldAffixFn, wasAffixed, affixClass, affixOptions, elem) {
     var shouldAffix= shouldAffixFn(elem[0].getBoundingClientRect());
     if(shouldAffix !== wasAffixed) {
       if(shouldAffix) {
-        elem.addClass(affixClass);
+        if(affixOptions.clone) {
+          var clone = affixClone(elem, affixClass);
+          elem.after(clone);
+        } else {
+          elem.addClass(affixClass);
+        }
       } else {
-        elem.removeClass(affixClass);
+        if(affixOptions.clone) {
+          elem.data('$ngScrollSpy.clone') && elem.data('$ngScrollSpy.clone').detach();
+        } else {
+          elem.removeClass(affixClass);
+        }
       }
     }
   };
@@ -216,7 +235,7 @@ mod.directive('affix', function(ScrollSpy) {
       affixedPos,
       trigger= false;
 
-    affixOptions = angular.extend({offset: 0}, affixOptions);
+    affixOptions = angular.extend({offset: 0, clone: false}, affixOptions);
 
     if(affixTo === 'top') {
       scrollHandler= ScrollSpy.onYScroll(function(pos) {
@@ -231,7 +250,7 @@ mod.directive('affix', function(ScrollSpy) {
             return (isAffixed= true);
           }
           return false;
-        }, wasAffixed, affixClass, elem);
+        }, wasAffixed, affixClass, affixOptions, elem);
       });
     } else if(affixTo === 'bottom') {
       trigger= true; // need to trigger scroll event
@@ -254,7 +273,7 @@ mod.directive('affix', function(ScrollSpy) {
           }
           // not affixed
           return false;
-        }, wasAffixed, affixClass, elem);
+        }, wasAffixed, affixClass, affixOptions, elem);
       });
     } else if(affixTo === 'left') {
       scrollHandler= ScrollSpy.onXScroll(function(pos) {
@@ -269,7 +288,7 @@ mod.directive('affix', function(ScrollSpy) {
             return (isAffixed= true);
           }
           return false;
-        }, wasAffixed, affixClass, elem);
+        }, wasAffixed, affixClass, affixOptions, elem);
       });
     } else if(affixTo === 'right') {
       trigger= true; // need to trigger scroll event
@@ -292,7 +311,7 @@ mod.directive('affix', function(ScrollSpy) {
           }
           // not affixed
           return false;
-        }, wasAffixed, affixClass, elem);
+        }, wasAffixed, affixClass, affixOptions, elem);
       });
     }
     if(trigger) {
