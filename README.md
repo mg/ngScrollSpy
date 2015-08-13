@@ -109,18 +109,18 @@ The class *affixed* will be added to the class once it reaches the bottom edge o
 
 Possible values for *affix* are *top*, *bottom*, *left* and *right*.
 
-#### More fluent passage by *cloning*
+#### More fluent passage by adding a *placeholder*
 In default mode the element which should be affixed is just set to *position fixed*.
 As this will pull the element out of its normal flow, the elements below will be
 moved up with a jolt.
 
-If you add `{clone: true}` to the affix options the original element will be cloned,
-the clone gets inserted after its origin and set to *position fixed*, so that you
+If you add `{placeholder: true}` to the affix options the original element will be cloned
+and the clone gets inserted after its origin to serve as a placeholder, so that you
 won't see any flickering effects.
 
-    <div affix affix-options="{clone: true}">Affixed!</div>
+    <div affix affix-options="{placeholder: true}">Affixed!</div>
 
-The default of the option `clone` is `false`.
+The default of the option `placeholder` is `false`.
 
 ### The pagemenu and pageitems directives
 The module provides two directives, *pageitems* attribute and *<pagemenu>* tag. The *pageitems* tag will parse the included HTML and query for items with a certain class. The menu will then be generated in the DOM where you put the *<pagemenu>* tag from that list of items. 
