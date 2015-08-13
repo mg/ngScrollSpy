@@ -198,12 +198,29 @@ mod.service('ScrollSpy', function($window) {
 
 });
 mod.directive('affix', function(ScrollSpy) {
-  var affixFn= function(shouldAffixFn, wasAffixed, affixClass, elem) {
+    var affixCloneFn= function(elem) {
+    if (!elem.data('$ngScrollSpy.clone')) {
+      var clone = elem.clone();
+      elem.data('$ngScrollSpy.clone', clone);
+    }
+    return elem.data('$ngScrollSpy.clone');
+  };
+
+  var affixFn= function(shouldAffixFn, wasAffixed, affixClass, affixOptions, elem) {
     var shouldAffix= shouldAffixFn(elem[0].getBoundingClientRect());
     if(shouldAffix !== wasAffixed) {
       if(shouldAffix) {
+        if(affixOptions.clone) {
+          // insert cloned element into DOM, so that it replaces the element,
+          // that will be pulled out of the flow.
+          elem.after(affixCloneFn(elem));
+        }
         elem.addClass(affixClass);
       } else {
+        if(affixOptions.clone) {
+          // remove clone from DOM again
+          affixCloneFn(elem).detach();
+        }
         elem.removeClass(affixClass);
       }
     }
@@ -216,7 +233,7 @@ mod.directive('affix', function(ScrollSpy) {
       affixedPos,
       trigger= false;
 
-    affixOptions = angular.extend({offset: 0}, affixOptions);
+    affixOptions = angular.extend({offset: 0, clone: false}, affixOptions);
 
     if(affixTo === 'top') {
       scrollHandler= ScrollSpy.onYScroll(function(pos) {
@@ -231,7 +248,7 @@ mod.directive('affix', function(ScrollSpy) {
             return (isAffixed= true);
           }
           return false;
-        }, wasAffixed, affixClass, elem);
+        }, wasAffixed, affixClass, affixOptions, elem);
       });
     } else if(affixTo === 'bottom') {
       trigger= true; // need to trigger scroll event
@@ -254,7 +271,7 @@ mod.directive('affix', function(ScrollSpy) {
           }
           // not affixed
           return false;
-        }, wasAffixed, affixClass, elem);
+        }, wasAffixed, affixClass, affixOptions, elem);
       });
     } else if(affixTo === 'left') {
       scrollHandler= ScrollSpy.onXScroll(function(pos) {
@@ -269,7 +286,7 @@ mod.directive('affix', function(ScrollSpy) {
             return (isAffixed= true);
           }
           return false;
-        }, wasAffixed, affixClass, elem);
+        }, wasAffixed, affixClass, affixOptions, elem);
       });
     } else if(affixTo === 'right') {
       trigger= true; // need to trigger scroll event
@@ -292,7 +309,7 @@ mod.directive('affix', function(ScrollSpy) {
           }
           // not affixed
           return false;
-        }, wasAffixed, affixClass, elem);
+        }, wasAffixed, affixClass, affixOptions, elem);
       });
     }
     if(trigger) {
