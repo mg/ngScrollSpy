@@ -1,9 +1,7 @@
 mod.directive('affix', function(ScrollSpy) {
-  var affixClone= function(elem, affixClass) {
+    var affixCloneFn= function(elem) {
     if (!elem.data('$ngScrollSpy.clone')) {
       var clone = elem.clone();
-      clone.addClass(affixClass);
-      clone.css('position', 'fixed');
       elem.data('$ngScrollSpy.clone', clone);
     }
     return elem.data('$ngScrollSpy.clone');
@@ -14,17 +12,17 @@ mod.directive('affix', function(ScrollSpy) {
     if(shouldAffix !== wasAffixed) {
       if(shouldAffix) {
         if(affixOptions.clone) {
-          var clone = affixClone(elem, affixClass);
-          elem.after(clone);
-        } else {
-          elem.addClass(affixClass);
+          // insert cloned element into DOM to serve as a placeholder,
+          // because the original element (elem) will be pulled out of the flow by getting affixed
+          elem.after(affixCloneFn(elem));
         }
+        elem.addClass(affixClass);
       } else {
         if(affixOptions.clone) {
-          elem.data('$ngScrollSpy.clone') && elem.data('$ngScrollSpy.clone').detach();
-        } else {
-          elem.removeClass(affixClass);
+          // remove clone from DOM again
+          affixCloneFn(elem).detach();
         }
+        elem.removeClass(affixClass);
       }
     }
   };
