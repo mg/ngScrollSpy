@@ -48,7 +48,7 @@ The data is normalized, e.g. any overscroll data is removed and instead flags ar
 
 A generic function to add a scroll handler. The *cond* function return true or false based on the data in the two parameters it receives. If the *cond* function returns true the handler get's called with the two objects. The addHandler function returns an id to the handler. Use the id to clean up once the handler is no longer needed. **In most cases you should not use this hook unless you need very special condition logic**.
 
-#####Cleanup on destory event
+#####Cleanup on destroy event
 
     ScrollSpy.removeHandler(id):
 
