@@ -199,25 +199,25 @@ mod.service('ScrollSpy', function($window) {
 });
 mod.directive('affix', function(ScrollSpy) {
     var affixCloneFn= function(elem) {
-    if (!elem.data('$ngScrollSpy.clone')) {
-      var clone = elem.clone();
-      elem.data('$ngScrollSpy.clone', clone);
+    if (!elem.data('$ngScrollSpy.placeholder')) {
+      var placeholder = elem.clone();
+      elem.data('$ngScrollSpy.placeholder', placeholder);
     }
-    return elem.data('$ngScrollSpy.clone');
+    return elem.data('$ngScrollSpy.placeholder');
   };
 
   var affixFn= function(shouldAffixFn, wasAffixed, affixClass, affixOptions, elem) {
     var shouldAffix= shouldAffixFn(elem[0].getBoundingClientRect());
     if(shouldAffix !== wasAffixed) {
       if(shouldAffix) {
-        if(affixOptions.clone) {
-          // insert cloned element into DOM, so that it replaces the element,
-          // that will be pulled out of the flow.
+        if(affixOptions.placeholder) {
+          // insert cloned element into DOM to serve as a placeholder,
+          // because the original element (elem) will be pulled out of the flow by getting affixed
           elem.after(affixCloneFn(elem));
         }
         elem.addClass(affixClass);
       } else {
-        if(affixOptions.clone) {
+        if(affixOptions.placeholder) {
           // remove clone from DOM again
           affixCloneFn(elem).detach();
         }
@@ -233,7 +233,7 @@ mod.directive('affix', function(ScrollSpy) {
       affixedPos,
       trigger= false;
 
-    affixOptions = angular.extend({offset: 0, clone: false}, affixOptions);
+    affixOptions = angular.extend({offset: 0, placeholder: false}, affixOptions);
 
     if(affixTo === 'top') {
       scrollHandler= ScrollSpy.onYScroll(function(pos) {
