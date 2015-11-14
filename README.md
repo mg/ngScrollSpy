@@ -2,7 +2,7 @@
 
 #ATTENTION: This is AbandonWare. The author (me) has stopped using AngularJS in both private life and work life. If you are interested in maintain this and develop it further, contact me and I will link to your repo.
 
-##Former users of this library have moved to and reccommended [Angular Strap](http://mgcrea.github.io/angular-strap/). Hope that will work for you.
+##Former users of this library have moved to and recommended [Angular Strap](http://mgcrea.github.io/angular-strap/). Hope that will work for you.
 
 ###What is it?
 A continuation of a previous project of mine, [ngPagemenu](https://github.com/mg/ngPagemenu), that adds features such as more defined api to work with the scroll event and an affix directive.
