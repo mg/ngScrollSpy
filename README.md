@@ -1,4 +1,5 @@
 #ngScrollSpy
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 #ATTENTION: This is AbandonWare. The author (me) has stopped using AngularJS in both private life and work life. If you are interested in maintain this and develop it further, contact me and I will link to your repo.
 
